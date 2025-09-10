@@ -25,5 +25,7 @@ jobs:
           git remote remove backup 2>/dev/null || true
           git remote add backup ${{ secrets.BACKUP_REPO_URL }}
 
-      - name: Push mirror to backup
-        run: git push --mirror backup
+      - name: Debug push
+        run: |
+          git remote -v
+          git push --mirror backup --verbose
