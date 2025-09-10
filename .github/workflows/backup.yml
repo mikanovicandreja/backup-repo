@@ -17,15 +17,13 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "mikanovicandreja"
+          git config --global user.email "mikanovic.andreja@gmail.com"
 
       - name: Add backup remote
         run: |
           git remote remove backup 2>/dev/null || true
           git remote add backup ${{ secrets.BACKUP_REPO_URL }}
 
-      - name: Debug push
-        run: |
-          git remote -v
-          git push --mirror backup --verbose
+      - name: Push mirror to backup
+        run: git push --mirror backup
