@@ -15,7 +15,15 @@ jobs:
         with:
           fetch-depth: 0  # fetch full history for mirror
 
-      - name: Mirror to backup repo
+      - name: Configure Git
         run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Add backup remote
+        run: |
+          git remote remove backup 2>/dev/null || true
           git remote add backup ${{ secrets.BACKUP_REPO_URL }}
-          git push --mirror backup
+
+      - name: Push mirror to backup
+        run: git push --mirror backup
