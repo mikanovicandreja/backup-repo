@@ -1,0 +1,21 @@
+name: Repository Backup
+
+on:
+  push:
+  schedule:
+    - cron: "0 0 1 * *" # 1st of every month at 00:00 UTC
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # fetch full history for mirror
+
+      - name: Mirror to backup repo
+        run: |
+          git remote add backup ${{ secrets.BACKUP_REPO_URL }}
+          git push --mirror backup
