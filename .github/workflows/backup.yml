@@ -10,20 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the full repo with all history
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # fetch full history for mirror
+          fetch-depth: 0
 
+      # Step 2: Configure Git identity for automated commits (good practice)
       - name: Configure Git
         run: |
-          git config --global user.name "mikanovicandreja"
-          git config --global user.email "mikanovic.andreja@gmail.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
+      # Step 3: Add backup remote (remove if exists to avoid errors)
       - name: Add backup remote
         run: |
           git remote remove backup 2>/dev/null || true
           git remote add backup ${{ secrets.BACKUP_REPO_URL }}
 
+      # Step 4: Push all branches and tags to backup
       - name: Push mirror to backup
-        run: git push --mirror backup
+        run: git push --mirror backup --verbose
