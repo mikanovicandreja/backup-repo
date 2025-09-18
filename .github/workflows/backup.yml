@@ -15,8 +15,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          repository: mikanovicandreja/backup-repo
-          token: ${{ secrets.BACKUP_REPO_URL }}
 
       # Step 2: Configure Git identity for automated commits (good practice)
       - name: Configure Git
