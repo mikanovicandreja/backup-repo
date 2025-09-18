@@ -4,11 +4,11 @@ How it works:
 
 Reads the siteDir configuration value, which points to your local static website files (HTML, CSS, JS, images, etc.).
 
-Creates an S3 bucket with website hosting enabled, using index.html as the default entry point.
+- Creates an S3 bucket with website hosting enabled, using index.html as the default entry point.
 
-Iterates through every file in siteDir and uploads it to the S3 bucket with the correct MIME type (e.g., text/html, image/png).
+- Iterates through every file in siteDir and uploads it to the S3 bucket with the correct MIME type (e.g., text/html, image/png).
 
-Sets all uploaded objects to be publicly readable.
+- Sets all uploaded objects to be publicly readable (DO NOT leave this - remove bucket or change this setting after testing).
 
 Exports:
 
