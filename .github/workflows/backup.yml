@@ -28,6 +28,11 @@ jobs:
           git remote remove backup 2>/dev/null || true
           git remote add backup ${{ secrets.BACKUP_REPO_URL }}
 
+      - name: Debug backup remote
+        run: |
+          git remote -v | sed 's/ghp_[^@]*/<TOKEN>/g'
+
+
       # Step 4: Push all branches and tags to backup
       - name: Push mirror to backup
         run: git push --mirror backup --verbose
